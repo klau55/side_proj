@@ -5,34 +5,76 @@
   text-align: center;
 }
 
-list {
-  font-size: 12px;
-  color: blue;
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.content-container {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.idea-list {
+  list-style-type: none;
+  padding: 30px;
+}
+
+.idea-item {
+  margin-bottom: 10px;
+}
+
+.bullet {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: palevioletred;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: palevioletred;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: grey;
+}
+
+.shimmering-title {
+  font-size: 36px;
+  font-weight: bold;
+  background: linear-gradient(to right, #f9f9f9, palevioletred, #f9f9f9);
+  background-size: 200% auto;
+  color: transparent;
+  text-align: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+      background-position: -200% center;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+      background-position: 200% center;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

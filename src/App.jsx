@@ -6,14 +6,23 @@ function App() {
 
   return (
     <>
-      <list>
-        <a>HELLO WORLD</a>
-        <li>IDEAS:</li>
-        <li>bad-habits tracker</li>
-        <li>“Personal gym buddy” finder</li>
-        <li>good habits tracker ^_^</li>
-        <button onClick={() => setCount((count) => count + 1)}>click if you dare</button>
-        <p>{count}</p>
+      <list class ='list'>
+      <div class="content-container">
+        <div class="shimmering-title">ADD MORE</div>
+        <div class="idea-list">
+          <div class="idea-item">
+              <span class="bullet"></span>Bad-Habits Tracker
+          </div>
+          <div class="idea-item">
+              <span class="bullet"></span>"Personal Gym Buddy" Finder
+          </div>
+          <div class="idea-item">
+              <span class="bullet"></span>Good Habits Tracker ^_^
+          </div>
+        </div>
+      </div>
+      <button class="button" onClick={() => setCount((count) => count + 1)}>click if you dare</button>
+      <p>{count}</p>
       </list>
     </>
   )
