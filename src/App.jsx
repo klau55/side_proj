@@ -1,29 +1,51 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
+import ideaService from './services/ideas'
+import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [newIdea, setNewIdea] = useState("")
+  const [ideas, setIdeas] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/ideas')
+      .then(response => {
+        setIdeas(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
+
+  const addIdea = (event) => {
+    event.preventDefault()
+    const ideaObject = {
+      id: String(ideas.length + 1),
+      content: newIdea
+    }
+    ideaService.create(ideaObject)
+    setIdeas(ideas.concat(ideaObject))
+    setNewIdea('')
+  }
+  const removeIdea = (id) => {
+    ideaService.remove(id)
+    setIdeas(ideas.filter(idea => idea.id !== id))
+  }
 
   return (
     <>
-      <list class ='list'>
-      <div class="content-container">
-        <div class="shimmering-title">ADD MORE</div>
-        <div class="idea-list">
-          <div class="idea-item">
-              <span class="bullet"></span>Bad-Habits Tracker
-          </div>
-          <div class="idea-item">
-              <span class="bullet"></span>"Personal Gym Buddy" Finder
-          </div>
-          <div class="idea-item">
-              <span class="bullet"></span>Good Habits Tracker ^_^
-          </div>
+      <div>
+        <div>ADD MORE</div>
+        <div>
+          {ideas.map(idea => <div key={idea.id}>{idea.content}
+          <button onClick={() => removeIdea(idea.id)}>remove</button>
+          </div>)}
         </div>
       </div>
-      <button class="button" onClick={() => setCount((count) => count + 1)}>click if you dare</button>
-      <p>{count}</p>
-      </list>
+      <form className="form" onSubmit={addIdea}>
+        <input onChange={(event) => setNewIdea(event.target.value)} type="text" placeholder="Add your own idea" className="input" />
+        <button type='submit'>SEND IT</button>
+      </form>
     </>
   )
 }
