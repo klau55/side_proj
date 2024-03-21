@@ -6,7 +6,7 @@ import ideaService from './services/ideas'
 import axios from 'axios'
 
 function App() {
-  /*const [newIdea, setNewIdea] = useState("")
+  const [newIdea, setNewIdea] = useState("")
   const [ideas, setIdeas] = useState([])
   useEffect(() => {
     axios.get('http://localhost:3001/ideas')
@@ -31,37 +31,34 @@ function App() {
   const removeIdea = (id) => {
     ideaService.remove(id)
     setIdeas(ideas.filter(idea => idea.id !== id))
-  }*/
-
+  }
 
   const [mouse, ref] = useMouse();
-  // console.log(mouse.x)
-
   return (
-    <div>
-      <h1 style={{color: 'gray'}}>Hello, World!</h1>
-      <div
-        className="blue-cirle"
-        style={{left: mouse.x, top: mouse.y}}
-      >
-      </div>
+    <div className='grid-container'>
+        <div
+          className="blue-cirle"
+          ref={ref}
+          style={{left: mouse.x, top: mouse.y}}
+        >
+        </div>
+        <div className="grid-item">
+          <h1 className="text">Hello, World!</h1>
+        </div>
+        <div className="grid-item">
+          <div className="shimmering-title">ADD MORE</div>
+          <div>
+            {ideas.map(idea => <div key={idea.id}>{idea.content}
+            <button onClick={() => removeIdea(idea.id)}>remove</button>
+            </div>)}
+          </div>
+        <form className="form" onSubmit={addIdea}>
+          <input onChange={(event) => setNewIdea(event.target.value)} type="text" placeholder="Add your own idea" className="input" />
+          <button className="button" type='submit'>SEND IT</button>
+        </form>
+        </div>
     </div>
   )
-  /*
-      <div>
-        <div>ADD MORE</div>
-        <div>
-          {ideas.map(idea => <div key={idea.id}>{idea.content}
-          <button onClick={() => removeIdea(idea.id)}>remove</button>
-          </div>)}
-        </div>
-      </div>
-      <form className="form" onSubmit={addIdea}>
-        <input onChange={(event) => setNewIdea(event.target.value)} type="text" placeholder="Add your own idea" className="input" />
-        <button type='submit'>SEND IT</button>
-      </form>
-    </>
-  )*/
 }
 
 export default App
